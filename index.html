@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiểu sử các cầu thủ bóng đá</title>
+    <title>Quản lý xe đầu kéo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,7 +47,7 @@
             background-color: #555;
         }
 
-        .bio {
+        .form-container {
             background-color: white;
             width: 600px;
             padding: 20px;
@@ -55,72 +55,133 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .bio h2 {
+        .form-container h2 {
             text-align: center;
         }
 
-        .bio p {
-            font-size: 16px;
-            line-height: 1.6;
+        .form-container input,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
+
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        .vehicle-list {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .vehicle-list h3 {
+            text-align: center;
+        }
+
+        .vehicle-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Tiểu sử các cầu thủ bóng đá</h1>
+    <h1>Quản lý xe đầu kéo</h1>
 </header>
 
 <div class="content">
     <div class="menu">
-        <a href="#" onclick="showBio('messi')">Messi</a>
-        <a href="#" onclick="showBio('ronaldo')">Ronaldo</a>
-        <a href="#" onclick="showBio('neymar')">Neymar</a>
-        <a href="#" onclick="showBio('mbappe')">Mbappé</a>
-        <a href="#" onclick="showBio('lewandowski')">Lewandowski</a>
+        <a href="#" onclick="showAddVehicleForm()">Thêm xe</a>
+        <a href="#" onclick="showVehicleList()">Danh sách xe</a>
     </div>
-    <div class="bio" id="bioContent">
-        <h2>Chào mừng bạn đến với trang tiểu sử cầu thủ</h2>
-        <p>Chọn cầu thủ để xem tiểu sử của họ.</p>
+    <div class="form-container" id="formContainer">
+        <h2>Thêm xe mới</h2>
+        <form id="vehicleForm">
+            <label for="licensePlate">Biển số xe:</label>
+            <input type="text" id="licensePlate" name="licensePlate" required>
+            <label for="parts">Linh kiện sửa chữa:</label>
+            <textarea id="parts" name="parts" rows="4" required></textarea>
+            <label for="notes">Ghi chú:</label>
+            <textarea id="notes" name="notes" rows="4" required></textarea>
+            <button type="submit">Thêm xe</button>
+        </form>
     </div>
 </div>
 
+<div class="vehicle-list" id="vehicleListContainer" style="display:none;">
+    <h3>Danh sách xe</h3>
+    <div id="vehicleList"></div>
+</div>
+
 <script>
-    function showBio(player) {
-        let bioContent = document.getElementById("bioContent");
-        
-        if (player === 'messi') {
-            bioContent.innerHTML = `
-                <h2>Tiểu sử Lionel Messi</h2>
-                <p>Lionel Messi, sinh ngày 24 tháng 6 năm 1987 tại Rosario, Argentina, là một trong những cầu thủ bóng đá vĩ đại nhất mọi thời đại. Messi bắt đầu sự nghiệp chuyên nghiệp tại FC Barcelona, nơi anh đã giành được nhiều danh hiệu, bao gồm 10 La Liga, 4 Champions League và 7 cúp Nhà vua. Anh cũng là cầu thủ ghi bàn hàng đầu mọi thời đại của La Liga và FC Barcelona.</p>
-                <p>Messi đã giành 7 Quả bóng vàng, một thành tích chưa ai có thể vượt qua. Anh còn giúp đội tuyển Argentina giành chức vô địch Copa America 2021.</p>
-            `;
-        } else if (player === 'ronaldo') {
-            bioContent.innerHTML = `
-                <h2>Tiểu sử Cristiano Ronaldo</h2>
-                <p>Cristiano Ronaldo, sinh ngày 5 tháng 2 năm 1985 tại Madeira, Bồ Đào Nha, là một trong những cầu thủ bóng đá xuất sắc nhất mọi thời đại. Ronaldo đã thi đấu cho nhiều câu lạc bộ nổi tiếng như Manchester United, Real Madrid, Juventus và hiện nay là Al Nassr.</p>
-                <p>Ronaldo giành 5 Quả bóng vàng và là cầu thủ ghi bàn nhiều nhất trong lịch sử Champions League. Anh còn là một biểu tượng quốc gia khi giúp đội tuyển Bồ Đào Nha giành chức vô địch Euro 2016 và Nations League 2019.</p>
-            `;
-        } else if (player === 'neymar') {
-            bioContent.innerHTML = `
-                <h2>Tiểu sử Neymar</h2>
-                <p>Neymar da Silva Santos Júnior, sinh ngày 5 tháng 2 năm 1992 tại Mogi das Cruzes, Brazil, là một trong những cầu thủ bóng đá nổi tiếng nhất hiện nay. Neymar nổi bật với tốc độ, kỹ thuật dribbling và khả năng ghi bàn tuyệt vời. Anh đã chơi cho các câu lạc bộ hàng đầu như Barcelona và Paris Saint-Germain (PSG).</p>
-                <p>Trong sự nghiệp, Neymar giành được nhiều danh hiệu, bao gồm các chức vô địch La Liga, Champions League và Ligue 1. Anh cũng là trụ cột của đội tuyển Brazil, giúp đội bóng này giành Copa America 2013 và Olympic 2016.</p>
-            `;
-        } else if (player === 'mbappe') {
-            bioContent.innerHTML = `
-                <h2>Tiểu sử Kylian Mbappé</h2>
-                <p>Kylian Mbappé, sinh ngày 20 tháng 12 năm 1998 tại Bondy, Pháp, là một trong những cầu thủ trẻ xuất sắc nhất thế giới. Anh nổi bật với tốc độ nhanh chóng và khả năng ghi bàn ấn tượng. Mbappé bắt đầu sự nghiệp ở AS Monaco và sau đó gia nhập Paris Saint-Germain (PSG).</p>
-                <p>Mbappé giành được nhiều danh hiệu quốc nội và là người hùng trong chiến thắng của đội tuyển Pháp tại World Cup 2018. Anh còn là cầu thủ trẻ nhất ghi bàn trong một trận chung kết World Cup.</p>
-            `;
-        } else if (player === 'lewandowski') {
-            bioContent.innerHTML = `
-                <h2>Tiểu sử Robert Lewandowski</h2>
-                <p>Robert Lewandowski, sinh ngày 21 tháng 8 năm 1988 tại Warsaw, Ba Lan, là một trong những tiền đạo xuất sắc nhất trong thế hệ của mình. Anh chơi cho Bayern Munich và đã giành vô số danh hiệu cùng đội bóng này, bao gồm Bundesliga, Champions League và các cúp quốc gia.</p>
-                <p>Lewandowski là một trong những cầu thủ ghi bàn hàng đầu ở châu Âu và đã giành nhiều giải thưởng cá nhân, bao gồm cả danh hiệu Cầu thủ xuất sắc nhất của FIFA năm 2020.</p>
-            `;
-        }
+    let vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+
+    function showAddVehicleForm() {
+        document.getElementById("formContainer").style.display = "block";
+        document.getElementById("vehicleListContainer").style.display = "none";
     }
+
+    function showVehicleList() {
+        document.getElementById("formContainer").style.display = "none";
+        document.getElementById("vehicleListContainer").style.display = "block";
+        displayVehicleList();
+    }
+
+    function displayVehicleList() {
+        const vehicleList = document.getElementById("vehicleList");
+        vehicleList.innerHTML = '';
+
+        vehicles.forEach(vehicle => {
+            const vehicleItem = document.createElement("div");
+            vehicleItem.classList.add("vehicle-item");
+            vehicleItem.innerHTML = `
+                <strong>Biển số xe:</strong> ${vehicle.licensePlate} <br>
+                <strong>Linh kiện sửa chữa:</strong> ${vehicle.parts} <br>
+                <strong>Ghi chú:</strong> ${vehicle.notes}
+            `;
+            vehicleList.appendChild(vehicleItem);
+        });
+    }
+
+    document.getElementById("vehicleForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const licensePlate = document.getElementById("licensePlate").value;
+        const parts = document.getElementById("parts").value;
+        const notes = document.getElementById("notes").value;
+
+        const newVehicle = {
+            licensePlate,
+            parts,
+            notes
+        };
+
+        vehicles.push(newVehicle);
+
+        // Lưu vào localStorage
+        localStorage.setItem('vehicles', JSON.stringify(vehicles));
+
+        document.getElementById("vehicleForm").reset();
+        alert("Thêm xe thành công!");
+
+        showVehicleList();
+    });
 </script>
 
 </body>
