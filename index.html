@@ -1,188 +1,191 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý xe đầu kéo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            padding: 10px;
-        }
-
-        .content {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .menu {
-            width: 200px;
-            background-color: #2f4f4f;
-            color: white;
-            padding: 10px;
-            margin-right: 20px;
-            border-radius: 8px;
-        }
-
-        .menu a {
-            color: white;
-            display: block;
-            padding: 10px;
-            text-decoration: none;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .menu a:hover {
-            background-color: #555;
-        }
-
-        .form-container {
-            background-color: white;
-            width: 600px;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-container h2 {
-            text-align: center;
-        }
-
-        .form-container input,
-        .form-container textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .form-container button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .form-container button:hover {
-            background-color: #45a049;
-        }
-
-        .vehicle-list {
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-        }
-
-        .vehicle-list h3 {
-            text-align: center;
-        }
-
-        .vehicle-item {
-            border-bottom: 1px solid #ddd;
-            padding: 10px 0;
-        }
-
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quản lý xe đầu kéo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+    .content {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .menu {
+      width: 200px;
+      background-color: #2f4f4f;
+      color: white;
+      padding: 10px;
+      margin-right: 20px;
+      border-radius: 8px;
+    }
+    .menu a {
+      color: white;
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      border-bottom: 1px solid #ddd;
+    }
+    .menu a:hover {
+      background-color: #555;
+    }
+    .form-container {
+      background-color: white;
+      width: 600px;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-container h2 {
+      text-align: center;
+    }
+    .form-container input,
+    .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-container button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .form-container button:hover {
+      background-color: #45a049;
+    }
+    .vehicle-list {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+    .vehicle-list h3 {
+      text-align: center;
+    }
+    .vehicle-item {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+  </style>
 </head>
 <body>
-
-<header>
+  <header>
     <h1>Quản lý xe đầu kéo</h1>
-</header>
+  </header>
 
-<div class="content">
+  <div class="content">
     <div class="menu">
-        <a href="#" onclick="showAddVehicleForm()">Thêm xe</a>
-        <a href="#" onclick="showVehicleList()">Danh sách xe</a>
+      <a href="#" onclick="showAddVehicleForm()">Thêm xe</a>
+      <a href="#" onclick="showVehicleList()">Danh sách xe</a>
     </div>
     <div class="form-container" id="formContainer">
-        <h2>Thêm xe mới</h2>
-        <form id="vehicleForm">
-            <label for="licensePlate">Biển số xe:</label>
-            <input type="text" id="licensePlate" name="licensePlate" required>
-            <label for="parts">Linh kiện sửa chữa:</label>
-            <textarea id="parts" name="parts" rows="4" required></textarea>
-            <label for="notes">Ghi chú:</label>
-            <textarea id="notes" name="notes" rows="4" required></textarea>
-            <button type="submit">Thêm xe</button>
-        </form>
+      <h2>Thêm xe mới</h2>
+      <form id="vehicleForm">
+        <label for="licensePlate">Biển số xe:</label>
+        <input type="text" id="licensePlate" name="licensePlate" required />
+        <label for="parts">Linh kiện sửa chữa:</label>
+        <textarea id="parts" name="parts" rows="4" required></textarea>
+        <label for="notes">Ghi chú:</label>
+        <textarea id="notes" name="notes" rows="4" required></textarea>
+        <button type="submit">Thêm xe</button>
+      </form>
     </div>
-</div>
+  </div>
 
-<div class="vehicle-list" id="vehicleListContainer" style="display:none;">
+  <div class="vehicle-list" id="vehicleListContainer" style="display:none;">
     <h3>Danh sách xe</h3>
     <div id="vehicleList"></div>
-</div>
+  </div>
 
-<script>
-    let vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+  <script type="module">
+    // Import Firebase SDK
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyA4mlNsG2CaMzy2Ys0iG4SJoTGMel_u9-4",
+      authDomain: "trucking-management.firebaseapp.com",
+      projectId: "trucking-management",
+      storageBucket: "trucking-management.appspot.com",
+      messagingSenderId: "114001344410",
+      appId: "1:114001344410:web:4eb1edb561e9a7d3436c23",
+      measurementId: "G-LWWS2ZEMW6"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Hiển thị giao diện
     function showAddVehicleForm() {
-        document.getElementById("formContainer").style.display = "block";
-        document.getElementById("vehicleListContainer").style.display = "none";
+      document.getElementById("formContainer").style.display = "block";
+      document.getElementById("vehicleListContainer").style.display = "none";
     }
 
     function showVehicleList() {
-        document.getElementById("formContainer").style.display = "none";
-        document.getElementById("vehicleListContainer").style.display = "block";
-        displayVehicleList();
+      document.getElementById("formContainer").style.display = "none";
+      document.getElementById("vehicleListContainer").style.display = "block";
+      displayVehicleList();
     }
 
-    function displayVehicleList() {
-        const vehicleList = document.getElementById("vehicleList");
-        vehicleList.innerHTML = '';
+    async function displayVehicleList() {
+      const vehicleList = document.getElementById("vehicleList");
+      vehicleList.innerHTML = "";
 
-        vehicles.forEach(vehicle => {
-            const vehicleItem = document.createElement("div");
-            vehicleItem.classList.add("vehicle-item");
-            vehicleItem.innerHTML = `
-                <strong>Biển số xe:</strong> ${vehicle.licensePlate} <br>
-                <strong>Linh kiện sửa chữa:</strong> ${vehicle.parts} <br>
-                <strong>Ghi chú:</strong> ${vehicle.notes}
-            `;
-            vehicleList.appendChild(vehicleItem);
+      const querySnapshot = await getDocs(collection(db, "vehicles"));
+      querySnapshot.forEach((doc) => {
+        const vehicle = doc.data();
+        const vehicleItem = document.createElement("div");
+        vehicleItem.classList.add("vehicle-item");
+        vehicleItem.innerHTML = `
+          <strong>Biển số xe:</strong> ${vehicle.licensePlate} <br>
+          <strong>Linh kiện sửa chữa:</strong> ${vehicle.parts} <br>
+          <strong>Ghi chú:</strong> ${vehicle.notes}
+        `;
+        vehicleList.appendChild(vehicleItem);
+      });
+    }
+
+    // Xử lý submit form
+    document.getElementById("vehicleForm").addEventListener("submit", async function(event) {
+      event.preventDefault();
+      const licensePlate = document.getElementById("licensePlate").value;
+      const parts = document.getElementById("parts").value;
+      const notes = document.getElementById("notes").value;
+
+      try {
+        await addDoc(collection(db, "vehicles"), {
+          licensePlate,
+          parts,
+          notes
         });
-    }
-
-    document.getElementById("vehicleForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        const licensePlate = document.getElementById("licensePlate").value;
-        const parts = document.getElementById("parts").value;
-        const notes = document.getElementById("notes").value;
-
-        const newVehicle = {
-            licensePlate,
-            parts,
-            notes
-        };
-
-        vehicles.push(newVehicle);
-
-        // Lưu vào localStorage
-        localStorage.setItem('vehicles', JSON.stringify(vehicles));
-
-        document.getElementById("vehicleForm").reset();
         alert("Thêm xe thành công!");
-
+        document.getElementById("vehicleForm").reset();
         showVehicleList();
+      } catch (e) {
+        alert("Lỗi khi thêm xe: " + e.message);
+      }
     });
-</script>
 
+    // Tải danh sách mặc định khi mở
+    showVehicleList();
+  </script>
 </body>
 </html>
