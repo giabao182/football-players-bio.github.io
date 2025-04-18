@@ -86,6 +86,7 @@
             padding: 10px;
             border-radius: 8px;
             background-color: #f9f9f9;
+            width: 600px;
         }
 
         .vehicle-list h3 {
@@ -110,31 +111,31 @@
         <a href="#" onclick="showAddVehicleForm()">Thêm xe</a>
         <a href="#" onclick="showVehicleList()">Danh sách xe</a>
     </div>
-    <div class="form-container" id="formContainer">
-        <h2>Thêm xe mới</h2>
-        <form id="vehicleForm">
-            <label for="licensePlate">Biển số xe:</label>
-            <input type="text" id="licensePlate" name="licensePlate" required>
-            <label for="parts">Linh kiện sửa chữa:</label>
-            <textarea id="parts" name="parts" rows="4" required></textarea>
-            <label for="notes">Ghi chú:</label>
-            <textarea id="notes" name="notes" rows="4" required></textarea>
-            <button type="submit">Thêm xe</button>
-        </form>
+    <div id="mainContent">
+        <div class="form-container" id="formContainer">
+            <h2>Thêm xe mới</h2>
+            <form id="vehicleForm">
+                <label for="licensePlate">Biển số xe:</label>
+                <input type="text" id="licensePlate" name="licensePlate" required>
+                <label for="parts">Linh kiện sửa chữa:</label>
+                <textarea id="parts" name="parts" rows="4" required></textarea>
+                <label for="notes">Ghi chú:</label>
+                <textarea id="notes" name="notes" rows="4" required></textarea>
+                <button type="submit">Thêm xe</button>
+            </form>
+        </div>
+        <div class="vehicle-list" id="vehicleListContainer" style="display:none;">
+            <h3>Danh sách xe</h3>
+            <div id="vehicleList"></div>
+        </div>
     </div>
 </div>
 
-<div class="vehicle-list" id="vehicleListContainer" style="display:none;">
-    <h3>Danh sách xe</h3>
-    <div id="vehicleList"></div>
-</div>
+<!-- Thêm thư viện Firebase trực tiếp thay vì dùng module -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-<!-- Firebase SDK -->
-<script type="module">
-  // Import the functions you need from the Firebase SDK
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
-  
+<script>
   // Your Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyA4mlNsG2CaMzy2Ys0iG4SJoTGMel_u9-4",
@@ -147,17 +148,19 @@
   };
 
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
 
   // Chức năng hiển thị form thêm xe
   function showAddVehicleForm() {
+    // Hiển thị form thêm xe và ẩn danh sách xe
     document.getElementById("formContainer").style.display = "block";
     document.getElementById("vehicleListContainer").style.display = "none";
   }
 
   // Chức năng hiển thị danh sách xe
   async function showVehicleList() {
+    // Hiển thị danh sách xe và ẩn form thêm xe
     document.getElementById("formContainer").style.display = "none";
     document.getElementById("vehicleListContainer").style.display = "block";
     await displayVehicleList();
@@ -168,7 +171,7 @@
     const vehicleList = document.getElementById("vehicleList");
     vehicleList.innerHTML = ''; // Xóa nội dung cũ trước khi hiển thị lại
 
-    const querySnapshot = await getDocs(collection(db, "vehicles"));
+    const querySnapshot = await db.collection("vehicles").get();
     if (querySnapshot.empty) {
       vehicleList.innerHTML = "<p>Chưa có xe nào được thêm vào.</p>";
     } else {
@@ -196,7 +199,7 @@
 
     // Thêm dữ liệu vào Firestore
     try {
-      await addDoc(collection(db, "vehicles"), {
+      await db.collection("vehicles").add({
         licensePlate,
         parts,
         notes
@@ -205,12 +208,16 @@
       document.getElementById("vehicleForm").reset();
       alert("Thêm xe thành công!");
 
+      // Sau khi thêm xe, chuyển sang trang danh sách xe
       showVehicleList();
     } catch (e) {
       console.error("Lỗi khi thêm xe: ", e);
       alert("Có lỗi xảy ra khi thêm xe.");
     }
   });
+
+  // Mặc định hiển thị form thêm xe khi trang được tải
+  window.onload = showAddVehicleForm;
 </script>
 
 </body>
